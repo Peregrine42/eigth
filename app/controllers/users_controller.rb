@@ -1,4 +1,10 @@
+
 class UsersController < ApplicationController
+  include Resourceful::Controller::NewAction
+  include Resourceful::Controller::IndexAction
+
+  extend Foo
+  show_resource
   
   attr_reader :resource
   helper_method :resource
@@ -14,70 +20,7 @@ class UsersController < ApplicationController
   alias :new_resource_path :new_user_path
   helper_method :new_resource_path
 
-  def resource_class
-    User
-  end
-
-  def new
-    @resource = resource_class.new
-    setup_new_page
-  end
-
-  def create
-    @resource = resource_class.new
-    @resource.assign_attributes(user_params)
-    if @resource.save
-      flash[:success] = "Success! User created."
-      redirect_to resource_path(@resource)
-    else
-      flash[:error] = "Could not create a new User."
-      setup_new_page
-      render :new
-    end
-  end
-
-  def show
-    @resource = resource_class.find(params[:id])
-    setup_show_page
-  end
-
-  def edit
-    @resource = resource_class.find(params[:id])
-    setup_edit_page
-  end
-
-  def update
-    @resource = resource_class.find(params[:id])
-    @resource.assign_attributes(user_params)
-    if @resource.save
-      flash[:success] = "Success! User updated."
-      redirect_to resource_path(@resource)
-    else
-      flash[:error] = "Could not update the User."
-      setup_edit_page
-      render :edit
-    end
-  end
-
-  def destroy
-    @resource = resource_class.find(params[:id])
-    if @resource.destroy
-      flash[:success] = "Success! User deleted."
-      redirect_to resources_path
-    else
-      flash[:error] = "Could not delete the User."
-      setup_show_page
-      render :show
-    end
-  end
-
-  def index
-    @resources = resource_class.all
-  end
-
-private
-
-  def user_params
+  def resource_params
     params.require(:user).permit(:username, :password, :password_confirmation, :role)
   end
 
@@ -89,5 +32,29 @@ private
 
   def setup_edit_page
   end
+
+  def resource_class
+    User
+  end
+
+  CREATE_SUCCESS_MESSAGE = "Success! Resource created."
+  CREATE_FAILURE_MESSAGE = "Could not create a new Resource."
+
+  UPDATE_SUCCESS_MESSAGE = "Success! Resource updated."
+  UPDATE_FAILURE_MESSAGE = "Could not update the Resource."
+
+  DELETE_SUCCESS_MESSAGE = "Success! Resource deleted."
+  DELETE_FAILURE_MESSAGE = "Could not delete the Resource."
+
+  # new_resource
+  # create_resource
+
+  # show_resource
+  # edit_resource
+
+  # update_resource
+  # delete_resource
+
+  # index_resources
 
 end
