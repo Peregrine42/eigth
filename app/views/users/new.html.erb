@@ -2,12 +2,17 @@
 <hr>
 <%= link_to "All", resources_path %>
 <hr>
-<%= form_for @resource do |f| %>
+<%= form_for resource do |f| %>
   <table>
     <tr>
       <td> <label for="username"> Username: </label> </td>
       <td>
         <%= f.text_field :username %>
+      </td>
+      <td>
+        <% resource.errors[:username].each do |e| %>
+          <span>Username <%= e.to_s %></span>
+        <% end %>
       </td>
     <tr>
     <tr>
@@ -15,17 +20,32 @@
       <td>
         <%= f.password_field :password %>
       </td>
+      <td>
+        <% resource.errors[:password].each do |e| %>
+          <span>Password <%= e.to_s %></span>
+        <% end %>
+      </td>
     </tr>
     <tr>
       <td> <label for="password_confirmation"> Confirm Password: </label> </td>
       <td>
         <%= f.password_field :password_confirmation %>
       </td>
+      <td>
+        <% resource.errors[:password_confirmation].each do |e| %>
+          <span>Confirmation <%= e.to_s %></span>
+        <% end %>
+      </td>
     </tr>
     <tr>
       <td> <label for="role"> Role: </label> </td>
       <td>
         <%= f.select(:role, @resource.class.roles.keys.map { |r| [r, r] }) %>
+      </td>
+      <td>
+        <% resource.errors[:role].each do |e| %>
+          <span>Role <%= e.to_s %></span>
+        <% end %>
       </td>
     </tr>
     <tr>

@@ -4,8 +4,11 @@
 <%= link_to "New", new_user_path %>
 <hr>
 <table>
-  <tr><th>Name</th></tr>
+  <tr><th>Name</th><th>Role</th></tr>
   <% @resources.each do |resource| %>
-    <tr><td><%= link_to resource.name, user_path(resource.id) %></td></tr>
+    <tr>
+      <td><%= link_to resource.name, user_path(resource.id) %></td>
+      <td><%= link_to resource.role, user_path(resource.id) %></td>
+    </tr>
   <% end %>
 </table>
