@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+.error {
+  border: 3px solid red;
+}
+
+body {
+  font-family: sans;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border: 1px solid #ddd;
+}

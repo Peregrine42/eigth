@@ -7,7 +7,25 @@
 |
 <%= link_to "Delete", resource_path(resource), method: :delete %>
 <hr>
-<table>
-  <tr><th>Name</th> <td><%= resource.name %></td></tr>
-  <tr><th>Role</th> <td><%= resource.role %></td></tr>
-</table>
+<ul style="list-style-type: none; margin-top: 5px; padding: 0; width: 250px">
+  <li><label for="username"> &#32; Username </label></li>
+  <li>
+    <ul style="list-style-type: none; margin: 0; padding: 10px;">
+      <li style="height: 25px"><%= resource.name %></li>
+    </ul>
+  </li>
+  <li>&nbsp;</li>
+  <li>&nbsp;</li>
+</ul>
+
+<ul style="list-style-type: none; margin-top: 5px; padding: 0;">
+  <li><label for="username"> &#32; Role </label></li>
+  <li>
+    <ul style="list-style-type: none; margin: 0; padding: 10px;">
+      <li><%= resource.role %></li>
+      <li>
+        &nbsp;
+      </li>
+    </ul>
+  </li>
+</ul>
