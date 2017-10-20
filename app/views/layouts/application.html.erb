@@ -12,9 +12,9 @@
     <hr>
     <%= link_to "Home", root_path %>
     <hr>
-    <%= flash[:success].blank? ? "&nbsp;".html_safe : flash[:success] %>
-    <%= flash[:error].blank? ? "&nbsp;".html_safe : flash[:error] %>
-    <hr>
+    <ul style="list-style-type: none; margin-top: 5px; padding: 0;">
+      <li><%= flash[:success] || flash[:error] || "&nbsp;".html_safe %></li>
+    </ul>
     <%= yield %>
   </body>
 </html>
