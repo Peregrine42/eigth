@@ -6,12 +6,20 @@ class UsersController < ApplicationController
   helper_method :resources
 
   alias :resource_path :user_path
+  helper_method :resource_path
+  alias :resources_path :users_path
+  helper_method :resources_path
+  alias :edit_resource_path :edit_user_path
+  helper_method :edit_resource_path
+  alias :new_resource_path :new_user_path
+  helper_method :new_resource_path
 
   def resource_class
     User
   end
 
   def new
+    @resource = resource_class.new
     setup_new_page
   end
 
@@ -28,7 +36,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @resource = resource_class.find(params[:id])
+    setup_show_page
+  end
+
   def edit
+    @resource = resource_class.find(params[:id])
     setup_edit_page
   end
 
@@ -45,8 +59,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    setup_show_page
+  def destroy
+    @resource = resource_class.find(params[:id])
+    if @resource.destroy
+      flash[:success] = "Success! User deleted."
+      redirect_to resources_path
+    else
+      flash[:error] = "Could not delete the User."
+      setup_show_page
+      render :show
+    end
   end
 
   def index
@@ -60,15 +82,12 @@ private
   end
 
   def setup_new_page
-    @resource = resource_class.new
   end
 
   def setup_show_page
-    @resource = resource_class.find(params[:id])
   end
 
   def setup_edit_page
-    @resource = resource_class.find(params[:id])
   end
 
 end

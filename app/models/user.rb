@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   enum role: [:guest, :standard, :administrator]
 
-  validates :username, presence: true
+  validates :username, presence: true, uniqueness: true
   alias_attribute :name, :username
   # validate :cannot_set_your_own_role
 

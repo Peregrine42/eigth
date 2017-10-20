@@ -1,6 +1,12 @@
 <h1>User <%= resource.name %></h1>
 
-<%= link_to "Edit", edit_user_path %>
+<hr>
+<%= link_to "All", resources_path %>
+|
+<%= link_to "Edit", edit_resource_path(resource) %>
+|
+<%= link_to "Delete", resource_path(resource), method: :delete %>
+<hr>
 <table>
   <tr><th>Name</th> <td><%= resource.name %></td></tr>
   <tr><th>Role</th> <td><%= resource.role %></td></tr>

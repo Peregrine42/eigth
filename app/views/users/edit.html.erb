@@ -1,5 +1,8 @@
 <h1>Edit User</h1>
-<%= form_for @resource do |f| %>
+<hr>
+<%= link_to "Cancel", resource_path(resource) %>
+<hr>
+<%= form_for resource do |f| %>
   <table>
     <tr>
       <td> <label for="username"> Username: </label> </td>
