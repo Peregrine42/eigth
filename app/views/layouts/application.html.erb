@@ -10,7 +10,8 @@
 
   <body>
     <hr>
-    <%= link_to "Home", root_path %>
+    <%= current_user.authenticated? ? (link_to "Home", root_path) : "&nbsp;".html_safe %>
+    <%= current_user.authenticated? ? (link_to "Sign out", session_path, method: :delete) : "&nbsp;".html_safe %>
     <hr>
     <ul style="list-style-type: none; margin-top: 5px; padding: 0;">
       <li><%= flash[:success] || flash[:error] || "&nbsp;".html_safe %></li>

@@ -3,12 +3,12 @@
 &nbsp;
 <hr>
 
-<%= form_for resource do |f| %>
+<%= form_for :session, url: { action: "create" } do |f| %>
   <ul style="list-style-type: none; margin-top: 5px; padding: 0; width: 250px">
     <li><label for="username"> Username * </label></li>
     <li>
       <ul style="list-style-type: none; margin: 0; padding: 10px;">
-        <li><%= f.text_field :username, class: "#{ "error" if resource.errors[:username].present? }" %></li>
+        <li><%= f.text_field :username %></li>
       </ul>
     </li>
     <li>&nbsp;</li>
@@ -18,11 +18,12 @@
     <li><label for="password"> Password * </label></li>
     <ul style="list-style-type: none; margin: 0; padding: 10px;">
       <li>
-        <%= f.password_field :password, class: "#{ "error" if resource.errors[:password].present? }" %>
+        <%= f.password_field :password %>
       </li>
     </ul>
+    <li>&nbsp;</li>
   </ul>
 
   <hr>
-  <%= f.submit %>
+  <%= f.submit "Sign in" %>
 <% end %>

@@ -19,4 +19,8 @@ class User < ApplicationRecord
   def cannot_set_your_own_role
     !((self.role != self.role_was) && (@current_user.id == self.id))
   end
+
+  def authenticated?
+    persisted?
+  end
 end
