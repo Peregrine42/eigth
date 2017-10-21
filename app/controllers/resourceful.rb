@@ -66,7 +66,7 @@ module Resourceful
 
   def index_resources
     define_method :index do
-      @resources = resource_class.all
+      @resources = resource_class.order(name: :asc)
     end
   end
 end
