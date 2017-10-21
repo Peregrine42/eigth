@@ -15,7 +15,7 @@ class SessionController < ApplicationController
       flash[:success] = "You are now signed in."
       redirect_to root_path
     else
-      flash.now[:error] = create_failure_message 
+      flash.now[:error] = "Sign in failed."
       setup_new_page
       render :new
     end
@@ -24,6 +24,10 @@ class SessionController < ApplicationController
   def destroy
     Session.new(session).destroy
     flash[:success] = "You have been signed out."
+    redirect_to new_session_path
+  end
+
+  def show
     redirect_to new_session_path
   end
 

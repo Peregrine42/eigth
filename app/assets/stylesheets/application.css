@@ -33,3 +33,7 @@ a:hover {
 hr {
   border: 1px solid #ddd;
 }
+
+.menu-bar {
+  color: #ddd;
+}
