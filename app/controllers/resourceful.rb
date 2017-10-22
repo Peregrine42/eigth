@@ -10,7 +10,7 @@ module Resourceful
     define_method(:create) do
       @resource = resource_class.new
       @resource.frontend_assign_attributes(resource_params)
-      if @resource.frontend_save
+      if @resource.frontend_save(current_user)
         flash.send(:[]=, *create_success_message(@resource))
         redirect_to resource_path(@resource.frontend_id)
       else
@@ -39,7 +39,7 @@ module Resourceful
     define_method(:update) do
       @resource = resource_class.frontend_find(params[:id])
       @resource.frontend_assign_attributes(resource_params)
-      if @resource.frontend_save
+      if @resource.frontend_save(current_user)
         flash.send(:[]=, *update_success_message(@resource))
         redirect_to resource_path(@resource.frontend_id)
       else
