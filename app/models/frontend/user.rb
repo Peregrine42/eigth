@@ -30,20 +30,28 @@ module Frontend
       self.class.draft_class
     end
 
-    def initialize resource=nil
+    def initialize resource=nil, current_user=nil
       @resource = resource || resource_class.new
-      @draft = draft_class.new
+      if current_user && current_user.draft_user
+        @draft = current_user.draft_user
+        @draft.activate
+      else
+        @draft = draft_class.new
+      end
     end
 
     def name
+      return @draft.name if @draft.active?
       @resource.name
     end
 
     def username
+      return @draft.name if @draft.active?
       @resource.name
     end
 
     def role
+      return @draft.role if @draft.active?
       @resource.role
     end
 
@@ -60,10 +68,13 @@ module Frontend
       commit = hash.delete(:commit)
       @draft.frontend_assign_attributes(commit, hash)
       @resource.frontend_assign_attributes hash
+      @draft.activate if commit == "Save Draft"
     end
 
     def frontend_save current_user=nil
-      @resource.frontend_save current_user
+      draft_result = @draft.frontend_save(current_user) 
+      return !draft_result if draft_result
+      @resource.frontend_save
     end
 
     def frontend_destroy
@@ -72,6 +83,10 @@ module Frontend
 
     def frontend_errors
       @resource.errors
+    end
+
+    def draft?
+      @draft.active?
     end
   end
 end

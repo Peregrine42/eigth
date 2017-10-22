@@ -24,4 +24,10 @@ class UsersController < ApplicationController
   def resource_class
     Frontend::User
   end
+
+  def create_failure_message resource=nil
+    return [:success, ""] if resource && resource.draft?
+    [:error, "Could not create a new Resource."]
+  end
+
 end

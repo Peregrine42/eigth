@@ -43,5 +43,6 @@
 
   <hr>
   <%= f.submit "Save Draft" %>
+  <%= f.submit "Clear Draft" if resource.draft? %>
   <%= f.submit %>
 <% end %>

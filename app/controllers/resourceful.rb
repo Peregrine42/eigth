@@ -1,7 +1,7 @@
 module Resourceful
   def new_resource
     define_method :new do
-      @resource = resource_class.new
+      @resource = resource_class.new(nil, current_user)
       setup_new_page
     end
   end
