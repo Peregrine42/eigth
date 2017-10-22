@@ -11,10 +11,10 @@ module Resourceful
       @resource = resource_class.new
       @resource.frontend_assign_attributes(resource_params)
       if @resource.frontend_save
-        flash[:success] = create_success_message
+        flash.send(:[]=, *create_success_message(@resource))
         redirect_to resource_path(@resource.frontend_id)
       else
-        flash.now[:error] = create_failure_message 
+        flash.now.send(:[]=, *create_failure_message(@resource))
         setup_new_page
         render :new
       end
@@ -40,10 +40,10 @@ module Resourceful
       @resource = resource_class.frontend_find(params[:id])
       @resource.frontend_assign_attributes(resource_params)
       if @resource.frontend_save
-        flash[:success] = update_success_message
+        flash.send(:[]=, *update_success_message(@resource))
         redirect_to resource_path(@resource.frontend_id)
       else
-        flash.now[:error] = update_failure_message
+        flash.now.send(:[]=, *update_failure_message(@resource))
         setup_edit_page
         render :edit
       end
@@ -54,10 +54,10 @@ module Resourceful
     define_method(:destroy) do
       @resource = resource_class.frontend_find(params[:id])
       if @resource.frontend_destroy
-        flash[:success] = delete_success_message
+        flash.send(:[]=, *delete_success_message(@resource))
         redirect_to resources_path
       else
-        flash.now[:error] = delete_failure_message
+        flash.now.send(:[]=, *delete_failure_message(@resource))
         setup_show_page
         render :show
       end

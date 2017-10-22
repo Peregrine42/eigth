@@ -3,7 +3,12 @@
     <li><label for="username"> Username * </label></li>
     <li>
       <ul style="list-style-type: none; margin: 0; padding: 10px;">
-        <li><%= f.text_field :username, class: "#{ "error" if resource.frontend_errors[:username].present? }" %></li>
+        <li>
+          <%= f.text_field :username, class: "#{ "error" if resource.frontend_errors[:username].present? }" %>
+          <% resource.frontend_errors[:username].each do |error| %>
+            <span>Username <%= error.to_s %></span>
+          <% end %>
+        </li>
       </ul>
     </li>
     <li><em>numbers, lowercase letters and undescores only</em></li>
