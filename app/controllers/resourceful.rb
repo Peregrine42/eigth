@@ -12,7 +12,7 @@ module Resourceful
       @resource.frontend_assign_attributes(resource_params)
       if @resource.frontend_save
         flash[:success] = create_success_message
-        redirect_to resource_path(@resource)
+        redirect_to resource_path(@resource.frontend_id)
       else
         flash.now[:error] = create_failure_message 
         setup_new_page
@@ -41,7 +41,7 @@ module Resourceful
       @resource.frontend_assign_attributes(resource_params)
       if @resource.frontend_save
         flash[:success] = update_success_message
-        redirect_to resource_path(@resource)
+        redirect_to resource_path(@resource.frontend_id)
       else
         flash.now[:error] = update_failure_message
         setup_edit_page

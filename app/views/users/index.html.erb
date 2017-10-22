@@ -7,8 +7,8 @@
   <tr><th>Name</th><th>Role</th></tr>
   <% @resources.each do |resource| %>
     <tr>
-      <td><%= link_to resource.name, user_path(resource.id) %></td>
-      <td><%= link_to resource.role, user_path(resource.id) %></td>
+      <td><%= link_to resource.name, user_path(resource.frontend_id) %></td>
+      <td><%= link_to resource.role, user_path(resource.frontend_id) %></td>
     </tr>
   <% end %>
 </table>

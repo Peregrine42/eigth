@@ -1,9 +1,9 @@
-<%= form_for :resource, method: resource.persisted? ? "put" : "post", url: { id: resource.frontend_id, action: resource.persisted? ? "update" : "create" } do |f| %>
+<%= form_for :resource, method: resource.frontend_persisted? ? "put" : "post", url: { id: resource.frontend_id, action: resource.frontend_persisted? ? "update" : "create" } do |f| %>
   <ul style="list-style-type: none; margin-top: 5px; padding: 0; width: 250px">
     <li><label for="username"> Username * </label></li>
     <li>
       <ul style="list-style-type: none; margin: 0; padding: 10px;">
-        <li><%= f.text_field :username, class: "#{ "error" if resource.errors[:username].present? }" %></li>
+        <li><%= f.text_field :username, class: "#{ "error" if resource.frontend_errors[:username].present? }" %></li>
       </ul>
     </li>
     <li><em>numbers, lowercase letters and undescores only</em></li>
@@ -13,7 +13,7 @@
     <li> <label for="role"> Role * </label> </li>
     <ul style="list-style-type: none; margin: 0; padding: 10px;">
       <li>
-        <%= f.select(:role, @resource.class.roles.keys.map { |r| [r, r] }, {}, { class: "#{ "error" if resource.errors[:role].present? }" }) %>
+        <%= f.select(:role, @resource.class.roles.keys.map { |r| [r, r] }, {}, { class: "#{ "error" if resource.frontend_errors[:role].present? }" }) %>
       </li>
     </ul>
   </ul>
@@ -22,7 +22,7 @@
     <li><label for="password"> Password * </label></li>
     <ul style="list-style-type: none; margin: 0; padding: 10px;">
       <li>
-        <%= f.password_field :password, class: "#{ "error" if resource.errors[:password].present? }" %>
+        <%= f.password_field :password, class: "#{ "error" if resource.frontend_errors[:password].present? }" %>
       </li>
     </ul>
   </ul>
@@ -31,7 +31,7 @@
     <li><label for="password_confirmation"> Confirm Password *</label></li>
     <ul style="list-style-type: none; margin: 0; padding: 10px;">
       <li>
-        <%= f.password_field :password_confirmation, class: "#{ "error" if resource.errors[:password_confirmation].present? }" %>
+        <%= f.password_field :password_confirmation, class: "#{ "error" if resource.frontend_errors[:password_confirmation].present? }" %>
       </li>
     </ul>
   </ul>

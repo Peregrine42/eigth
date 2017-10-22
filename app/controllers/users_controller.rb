@@ -21,6 +21,6 @@ class UsersController < ApplicationController
   end
 
   def resource_class
-    User
+    Frontend::User
   end
 end
