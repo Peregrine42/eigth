@@ -4,6 +4,10 @@ module Frontend
       def resource_class
         ::User
       end
+
+      def draft_class
+        ::Draft::User
+      end
       
       def frontend_list
         resource_class.frontend_list.map { |r| new(r) }
@@ -22,8 +26,13 @@ module Frontend
       self.class.resource_class
     end
 
+    def draft_class
+      self.class.draft_class
+    end
+
     def initialize resource=nil
       @resource = resource || resource_class.new
+      @draft = draft_class.new
     end
 
     def name
@@ -47,7 +56,10 @@ module Frontend
     end
 
     def frontend_assign_attributes args
-      @resource.frontend_assign_attributes args
+      hash = args.to_h
+      commit = hash.delete(:commit)
+      @draft.frontend_assign_attributes(commit, hash)
+      @resource.frontend_assign_attributes hash
     end
 
     def frontend_save

@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
   def resource_params
     params.require(:resource).permit(:username, :password, :password_confirmation, :role)
+      .merge(commit: params[:commit])
   end
 
   def resource_class
