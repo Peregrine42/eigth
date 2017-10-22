@@ -9,8 +9,8 @@ module Resourceful
   def create_resource
     define_method(:create) do
       @resource = resource_class.new
-      @resource.assign_attributes(resource_params)
-      if @resource.save
+      @resource.frontend_assign_attributes(resource_params)
+      if @resource.frontend_save
         flash[:success] = create_success_message
         redirect_to resource_path(@resource)
       else
@@ -23,23 +23,23 @@ module Resourceful
   
   def show_resource
     define_method :show do
-      @resource = resource_class.find(params[:id])
+      @resource = resource_class.frontend_find(params[:id])
       setup_show_page
     end
   end
 
   def edit_resource
     define_method(:edit) do
-      @resource = resource_class.find(params[:id])
+      @resource = resource_class.frontend_find(params[:id])
       setup_edit_page
     end
   end
 
   def update_resource
     define_method(:update) do
-      @resource = resource_class.find(params[:id])
-      @resource.assign_attributes(resource_params)
-      if @resource.save
+      @resource = resource_class.frontend_find(params[:id])
+      @resource.frontend_assign_attributes(resource_params)
+      if @resource.frontend_save
         flash[:success] = update_success_message
         redirect_to resource_path(@resource)
       else
@@ -52,8 +52,8 @@ module Resourceful
 
   def destroy_resource
     define_method(:destroy) do
-      @resource = resource_class.find(params[:id])
-      if @resource.destroy
+      @resource = resource_class.frontend_find(params[:id])
+      if @resource.frontend_destroy
         flash[:success] = delete_success_message
         redirect_to resources_path
       else
@@ -66,7 +66,7 @@ module Resourceful
 
   def index_resources
     define_method :index do
-      @resources = resource_class.order(name: :asc)
+      @resources = resource_class.frontend_list
     end
   end
 end

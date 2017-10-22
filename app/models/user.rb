@@ -1,5 +1,25 @@
 class User < ApplicationRecord
-  attr_reader :current_user
+  class << self
+    def frontend_find id
+      find(id)
+    end
+
+    def frontend_list
+      order(name: :asc)
+    end
+  end
+
+  def frontend_assign_attributes args
+    assign_attributes args
+  end
+
+  def frontend_save
+    save
+  end
+
+  def frontend_destroy
+    destroy
+  end
 
   has_secure_password
 

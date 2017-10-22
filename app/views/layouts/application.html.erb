@@ -10,9 +10,13 @@
 
   <body>
     <hr>
-    <%= current_user.authenticated? ? (link_to "Home", root_path) : "&nbsp;".html_safe %>
-    <span class="menu-bar">|</span>
-    <%= current_user.authenticated? ? (link_to "Sign out", session_path, method: :delete) : "&nbsp;".html_safe %>
+    <% if current_user.authenticated? %>
+      <%= link_to "Home", root_path %>
+      <span class="menu-bar">|</span>
+      <%= link_to "Sign out", session_path, method: :delete %>
+    <% else %>
+      &nbsp;
+    <% end %>
     <hr>
     <ul style="list-style-type: none; margin-top: 5px; padding: 0;">
       <li><%= flash[:success] || flash[:error] || "&nbsp;".html_safe %></li>
