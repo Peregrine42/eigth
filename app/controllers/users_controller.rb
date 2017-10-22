@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   alias :new_resource_path :new_user_path
 
   def resource_params
-    params.require(:user).permit(:username, :password, :password_confirmation, :role)
+    params.require(:resource).permit(:username, :password, :password_confirmation, :role)
   end
 
   def resource_class

@@ -1,4 +1,4 @@
-<%= form_for resource do |f| %>
+<%= form_for :resource, method: resource.persisted? ? "put" : "post", url: { id: resource.frontend_id, action: resource.persisted? ? "update" : "create" } do |f| %>
   <ul style="list-style-type: none; margin-top: 5px; padding: 0; width: 250px">
     <li><label for="username"> Username * </label></li>
     <li>

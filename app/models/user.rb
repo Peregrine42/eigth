@@ -9,6 +9,10 @@ class User < ApplicationRecord
     end
   end
 
+  def frontend_id
+    id
+  end
+
   def frontend_assign_attributes args
     assign_attributes args
   end
