@@ -62,8 +62,8 @@ module Frontend
       @resource.frontend_assign_attributes hash
     end
 
-    def frontend_save
-      @resource.frontend_save
+    def frontend_save current_user=nil
+      @resource.frontend_save current_user
     end
 
     def frontend_destroy

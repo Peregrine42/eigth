@@ -17,7 +17,7 @@ class User < ApplicationRecord
     assign_attributes args
   end
 
-  def frontend_save
+  def frontend_save current_user=nil
     save
   end
 
