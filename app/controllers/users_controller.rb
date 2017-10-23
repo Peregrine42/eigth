@@ -1,15 +1,35 @@
 class UsersController < ApplicationController
   include ResourcefulConstants
   include ResourcefulBasicSetup
-  extend Resourceful
+  include Resourceful
 
-  index_resources
-  new_resource
-  create_resource
-  show_resource
-  edit_resource
-  update_resource
-  destroy_resource
+  def index
+    index_resources
+  end
+
+  def new
+    new_resource
+  end
+
+  def create
+    create_resource
+  end
+
+  def show
+    show_resource
+  end
+
+  def edit
+    edit_resource
+  end
+
+  def update
+    update_resource
+  end
+
+  def destroy
+    destroy_resource
+  end
 
   alias :resource_path :user_path
   alias :resources_path :users_path
