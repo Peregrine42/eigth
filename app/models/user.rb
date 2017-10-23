@@ -28,6 +28,7 @@ class User < ApplicationRecord
   has_secure_password
 
   enum role: [:guest, :standard, :administrator]
+  enum status: [:draft, :live]
 
   validates :username, presence: true, uniqueness: true
   alias_attribute :name, :username

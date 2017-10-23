@@ -16,6 +16,14 @@ module Frontend
       def roles
         resource_class.roles
       end
+
+      def statuses
+        resource_class.statuses
+      end
+    end
+
+    def status
+      @resource.status
     end
 
     def resource_class

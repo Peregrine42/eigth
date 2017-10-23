@@ -19,6 +19,15 @@
   </ul>
 
   <ul style="list-style-type: none; margin-top: 5px; padding: 0;">
+    <li> <label for="status"> Status </label> </li>
+    <ul style="list-style-type: none; margin: 0; padding: 10px;">
+      <li>
+        <%= f.select(:status, @resource.class.statuses.keys.map { |r| [r, r] }, {}, { class: "#{ "error" if resource.frontend_errors[:status].present? }" }) %>
+      </li>
+    </ul>
+  </ul>
+
+  <ul style="list-style-type: none; margin-top: 5px; padding: 0;">
     <li><label for="password"> Password * </label></li>
     <ul style="list-style-type: none; margin: 0; padding: 10px;">
       <li>
